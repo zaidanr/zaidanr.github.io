@@ -6,7 +6,9 @@
 
 {% assign title_separator = site.title_separator | default: '-' | replace: '|', '&#124;' %}
 
-{%- if page.title -%}
+{%- if page.url == "/" -%}
+  {%- assign seo_title = "zaidanr" | append: " " | append: title_separator | append: " " | append: site.title -%}
+{%- elsif page.title -%}
   {%- assign seo_title = page.title | append: " " | append: title_separator | append: " " | append: site.title -%}
 {%- endif -%}
 

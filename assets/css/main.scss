@@ -2,9 +2,491 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-.img_content { margin-top: 10px; margin-bottom: 10px; margin-left: auto; margin-right: auto; display: block }
-
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* ============================================================
+   CYBERPUNK 2077 OVERRIDES
+   Pure CSS — no JS, no heavy assets. Dark skin base +
+   neon yellow (#f7df1e) and cyan (#00e5ff) accents.
+   ============================================================ */
+
+:root {
+  --cp-yellow:  #f7df1e;
+  --cp-cyan:    #00e5ff;
+  --cp-bg:      #0a0a0a;
+  --cp-surface: #111111;
+  --cp-surface2:#161616;
+  --cp-border:  #222222;
+  --cp-text:    #d4d4d4;
+  --cp-muted:   #5a5a5a;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--cp-bg) !important;
+  color: var(--cp-text) !important;
+}
+
+.initial-content,
+.search-content {
+  background-color: var(--cp-bg) !important;
+}
+
+::selection {
+  background: rgba(247, 223, 30, 0.22);
+  color: var(--cp-text);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--cp-bg); }
+::-webkit-scrollbar-thumb { background: var(--cp-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cp-yellow); }
+
+/* ── Masthead / Nav ─────────────────────────────────────────── */
+
+.masthead {
+  position: relative !important;
+  background-color: var(--cp-bg) !important;
+  border-bottom: 1px solid var(--cp-yellow) !important;
+  box-shadow: 0 1px 24px rgba(247, 223, 30, 0.12) !important;
+}
+
+/* Subtle scanline overlay */
+.masthead::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.masthead__inner-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.greedy-nav {
+  background: var(--cp-bg) !important;
+}
+
+.greedy-nav button {
+  background: transparent !important;
+}
+
+/* Site title — neon yellow glow */
+.site-title,
+.site-title:visited {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--cp-yellow) !important;
+  text-shadow:
+    0 0 8px  rgba(247, 223, 30, 0.7),
+    0 0 20px rgba(247, 223, 30, 0.3) !important;
+  transition: color 0.2s, text-shadow 0.2s !important;
+}
+
+/* Glitch effect on site-title hover */
+@keyframes cp-glitch {
+  0%   { transform: none;          clip-path: none; }
+  15%  { transform: translate(-3px, 0); clip-path: inset(0 0 92% 0); }
+  30%  { transform: translate( 3px, 0); clip-path: inset(85% 0 0 0); }
+  45%  { transform: none;          clip-path: none; }
+  100% { transform: none;          clip-path: none; }
+}
+
+.site-title:hover {
+  color: var(--cp-cyan) !important;
+  text-shadow:
+    0 0 8px  rgba(0, 229, 255, 0.7),
+    0 0 20px rgba(0, 229, 255, 0.3) !important;
+  animation: cp-glitch 0.35s steps(1) 1;
+}
+
+/* Nav links */
+.greedy-nav .visible-links a,
+.greedy-nav .hidden-links a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  color: var(--cp-text) !important;
+  transition: color 0.15s !important;
+}
+
+.greedy-nav .visible-links a:hover,
+.greedy-nav .hidden-links a:hover,
+.greedy-nav .visible-links a.active,
+.greedy-nav .hidden-links a.active {
+  color: var(--cp-yellow) !important;
+}
+
+.greedy-nav .visible-links a::before {
+  background: var(--cp-yellow) !important;
+}
+
+.greedy-nav__toggle {
+  color: var(--cp-text) !important;
+}
+
+.search__toggle {
+  color: var(--cp-text) !important;
+}
+
+.search__toggle:hover {
+  color: var(--cp-yellow) !important;
+}
+
+/* ── Typography / Headings ──────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6,
+.archive__subtitle {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  color: var(--cp-text) !important;
+}
+
+/* Post/page title */
+.page__title {
+  color: var(--cp-yellow) !important;
+  text-shadow:
+    0 0 12px rgba(247, 223, 30, 0.35),
+    0 0 30px rgba(247, 223, 30, 0.12) !important;
+}
+
+/* ── Links ──────────────────────────────────────────────────── */
+
+a {
+  color: var(--cp-cyan) !important;
+  transition: color 0.15s !important;
+}
+
+a:hover {
+  color: var(--cp-yellow) !important;
+  text-decoration: none !important;
+}
+
+/* ── Code & Syntax ──────────────────────────────────────────── */
+
+code,
+kbd {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  font-size: 0.85em !important;
+  background: var(--cp-surface2) !important;
+  color: var(--cp-cyan) !important;
+  border: 1px solid var(--cp-border) !important;
+  border-radius: 2px !important;
+  padding: 0.1em 0.35em !important;
+}
+
+pre,
+.highlight {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  background: var(--cp-surface) !important;
+  border: 1px solid var(--cp-border) !important;
+  border-left: 3px solid var(--cp-yellow) !important;
+  border-radius: 3px !important;
+}
+
+/* Reset the inline code style inside pre */
+pre code,
+.highlight code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-size: 1em !important;
+}
+
+/* Highlight line numbers / gutter */
+.highlight .lineno {
+  color: var(--cp-muted) !important;
+  border-right: 1px solid var(--cp-border) !important;
+}
+
+/* ── Sidebar / Author ───────────────────────────────────────── */
+
+.sidebar {
+  background: transparent !important;
+}
+
+.author__avatar img {
+  border-radius: 50% !important;
+  border: 2px solid var(--cp-yellow) !important;
+  box-shadow:
+    0 0 0 3px rgba(247, 223, 30, 0.15),
+    0 0 20px rgba(247, 223, 30, 0.25) !important;
+}
+
+.author__name {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: var(--cp-yellow) !important;
+}
+
+.author__bio {
+  color: var(--cp-muted) !important;
+  font-size: 0.82rem !important;
+}
+
+.author__urls-wrapper .btn {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  background: transparent !important;
+  border: 1px solid var(--cp-border) !important;
+  color: var(--cp-muted) !important;
+}
+
+.author__urls-wrapper .btn:hover {
+  border-color: var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+.author__urls a {
+  color: var(--cp-text) !important;
+}
+
+.author__urls a:hover {
+  color: var(--cp-cyan) !important;
+}
+
+/* ── Post listings (archive) ────────────────────────────────── */
+
+.list__item {
+  border-bottom: 1px solid var(--cp-border) !important;
+}
+
+.archive__item-title a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--cp-text) !important;
+}
+
+.archive__item-title a:hover {
+  color: var(--cp-yellow) !important;
+}
+
+.archive__item-excerpt {
+  color: var(--cp-muted) !important;
+  font-size: 0.88rem !important;
+}
+
+/* ── Meta (date, read-time) ─────────────────────────────────── */
+
+.page__meta,
+.page__meta-sep {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.72rem !important;
+  color: var(--cp-muted) !important;
+  letter-spacing: 0.03em !important;
+}
+
+.page__meta a {
+  color: var(--cp-muted) !important;
+}
+
+.page__meta a:hover {
+  color: var(--cp-yellow) !important;
+}
+
+/* ── Tags & Categories ──────────────────────────────────────── */
+
+.page__taxonomy-item,
+.page__taxonomy-item a {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.72rem !important;
+  background: var(--cp-surface) !important;
+  border: 1px solid var(--cp-border) !important;
+  color: var(--cp-cyan) !important;
+  border-radius: 2px !important;
+  padding: 0.15em 0.55em !important;
+  transition: border-color 0.15s, color 0.15s !important;
+}
+
+.page__taxonomy-item:hover,
+.page__taxonomy-item a:hover {
+  background: var(--cp-surface) !important;
+  border-color: var(--cp-cyan) !important;
+  color: var(--cp-yellow) !important;
+}
+
+/* ── Content elements ───────────────────────────────────────── */
+
+blockquote {
+  background: var(--cp-surface) !important;
+  border-left: 3px solid var(--cp-cyan) !important;
+  color: var(--cp-text) !important;
+  font-style: italic !important;
+}
+
+hr {
+  border-color: var(--cp-border) !important;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse !important;
+  font-size: 0.9rem !important;
+}
+
+th {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  background: var(--cp-surface) !important;
+  color: var(--cp-yellow) !important;
+  border-bottom: 2px solid var(--cp-yellow) !important;
+}
+
+td {
+  border-bottom: 1px solid var(--cp-border) !important;
+}
+
+tr:hover td {
+  background: var(--cp-surface) !important;
+}
+
+/* ── TOC / Sidebar nav ──────────────────────────────────────── */
+
+.nav__title {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--cp-yellow) !important;
+  border-bottom: 1px solid var(--cp-border) !important;
+}
+
+.toc .nav__title {
+  background: var(--cp-surface) !important;
+}
+
+.toc__menu a {
+  font-size: 0.82rem !important;
+  color: var(--cp-muted) !important;
+  border-bottom: 1px solid var(--cp-border) !important;
+}
+
+.toc__menu a:hover,
+.toc__menu a.active {
+  color: var(--cp-yellow) !important;
+  background: var(--cp-surface) !important;
+}
+
+/* ── Pagination & Buttons ───────────────────────────────────── */
+
+.pagination--pager {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  background: var(--cp-surface) !important;
+  border: 1px solid var(--cp-border) !important;
+  color: var(--cp-text) !important;
+  border-radius: 2px !important;
+  transition: border-color 0.15s, color 0.15s !important;
+}
+
+.pagination--pager:hover {
+  background: var(--cp-surface) !important;
+  border-color: var(--cp-yellow) !important;
+  color: var(--cp-yellow) !important;
+}
+
+.btn {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  border-radius: 2px !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.page__footer {
+  background: var(--cp-bg) !important;
+  border-top: 1px solid var(--cp-yellow) !important;
+  box-shadow: 0 -1px 20px rgba(247, 223, 30, 0.08) !important;
+}
+
+.page__footer-copyright,
+.page__footer-follow {
+  color: var(--cp-muted) !important;
+  font-size: 0.78rem !important;
+}
+
+.page__footer a {
+  color: var(--cp-muted) !important;
+}
+
+.page__footer a:hover {
+  color: var(--cp-yellow) !important;
+}
+
+/* ── Search overlay ─────────────────────────────────────────── */
+
+.search-content .search-input {
+  background: var(--cp-surface) !important;
+  border: 1px solid var(--cp-border) !important;
+  border-radius: 2px !important;
+  color: var(--cp-text) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.search-content .search-input:focus {
+  border-color: var(--cp-yellow) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--cp-yellow) !important;
+}
+
+/* ── Misc ────────────────────────────────────────────────────── */
+
+.img_content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* Taxonomy archive index */
+.taxonomy__index a {
+  font-family: 'Rajdhani', sans-serif !important;
+  color: var(--cp-text) !important;
+}
+
+.taxonomy__index a:hover {
+  color: var(--cp-yellow) !important;
+}
+
+/* Related posts heading */
+.page__related-title {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--cp-yellow) !important;
+}
