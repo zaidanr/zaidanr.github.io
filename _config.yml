@@ -58,8 +58,8 @@ plugins:
 
 author:
   name   : "Zaidan Rizaki"
-  avatar : "/assets/images/smudge.jpeg"
-  bio    : "A guy who has big interest in cloud, networking and information security stuff."
+  avatar : "/assets/images/avatar.png"
+  bio    : "A guy who has big interest in cloud, networking, and information security stuff."
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin-in"

@@ -227,6 +227,9 @@ pre code,
 }
 
 .author__avatar img {
+  width: 100px;   /* set your desired size */
+  height: 100px;  /* same as width */
+  object-fit: cover; /* crops the image to fill the square */
   border-radius: 50% !important;
   border: 2px solid var(--cp-yellow) !important;
   box-shadow:
